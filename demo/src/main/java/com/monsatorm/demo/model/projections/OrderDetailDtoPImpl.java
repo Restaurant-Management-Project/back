@@ -2,6 +2,8 @@ package com.monsatorm.demo.model.projections;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Builder
 @Setter
 @Getter
@@ -12,7 +14,7 @@ public class OrderDetailDtoPImpl {
 
     private Integer quantity;
 
-    private Integer price;
+    private BigDecimal price;
 
-    private Integer totalPrice;
+    private BigDecimal totalPrice;
 }
