@@ -1,5 +1,6 @@
 package com.monsatorm.demo.service.impl;
 
+import com.monsatorm.demo.model.projections.OrderDetailDtoP;
 import com.monsatorm.demo.model.projections.OrderDetailDtoPImpl;
 import com.monsatorm.demo.repository.OrderDetailRepository;
 import com.monsatorm.demo.service.OrderDetailService;
@@ -17,8 +18,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public List<OrderDetailDtoPImpl> getOrderDetailByTableId(Integer tableId) {
         return orderDetailRepository.getOrderDetailByTableId(tableId).stream()
                 .map(orderDetailDtoP -> OrderDetailDtoPImpl.builder()
-                        .totalPrice(orderDetailDtoP.getTotalPrice())
-                        .price(orderDetailDtoP.getPrice())
+                        .productPrice(orderDetailDtoP.getPrice())
                         .productName(orderDetailDtoP.getProductName())
                         .quantity(orderDetailDtoP.getQuantity())
                         .build())

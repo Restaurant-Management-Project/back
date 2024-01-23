@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
     private final OrderService orderService;
 
-    @PutMapping("/close-order")
-    void closeOrder(){
-
+    @PutMapping("/close-order/{orderId}")
+    void closeOrder(@PathVariable("orderId") Integer orderId){
+        orderService.closeOrder(orderId);
     }
 }
