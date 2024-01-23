@@ -30,8 +30,9 @@ public class RequestController {
         //service call
     }
 
-    @GetMapping("/order_details/{id}")
-    public Order getOrder(@PathVariable("id") UUID id, @RequestBody Order order) {
-        return order; //fow now
+    @GetMapping("/order_details")
+    public String getOrder() {
+
+        return "Hello"; //fow now
     }
 }
