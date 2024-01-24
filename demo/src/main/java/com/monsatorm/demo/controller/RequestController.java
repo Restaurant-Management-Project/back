@@ -3,13 +3,14 @@ package com.monsatorm.demo.controller;
 import com.monsatorm.demo.model.dbo.Order;
 import com.monsatorm.demo.model.dto.request.ClientRequestDto;
 import com.monsatorm.demo.model.dto.request.ManagerRequestDto;
-import com.monsatorm.demo.service.ClientService;
-import com.monsatorm.demo.service.ManagerService;
+import com.monsatorm.demo.model.projections.OrderDetailDtoPImpl;
+import com.monsatorm.demo.service.*;
 import com.monsatorm.demo.service.implementation.ClientServiceImpl;
 import com.monsatorm.demo.service.implementation.ManagerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,22 +18,29 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 public class RequestController {
-    private final ClientServiceImpl clientService = new ClientServiceImpl();
-    private final ManagerServiceImpl managerService = new ManagerServiceImpl();
+    private final OrderService orderService;
+    private final OrderDetailService orderDetailService;
+    private RequestService requestService;
 
-    @PostMapping("/client_action")
-    public void getClientRequest(@RequestBody ClientRequestDto clientRequestDto) {
 
-        //service call
-    }
-    @PostMapping("/manager_action")
-    public void getManagerRequest(@RequestBody ManagerRequestDto managerRequestDto) {
-        //service call
+    @PutMapping("/close-order/{orderId}")
+    void closeOrder(@PathVariable("orderId") Integer orderId){
+        orderService.closeOrder(orderId);
     }
 
-    @GetMapping("/order_details")
-    public String getOrder() {
-
-        return "Hello"; //fow now
+    @GetMapping("/get-by-table/{tableId}")
+    public List<OrderDetailDtoPImpl> getOrderDetailByTableId(@PathVariable("tableId") Integer tableId) {
+        return orderDetailService.getOrderDetailByTableId(tableId);
     }
+
+    @PostMapping("/create-request/{orderId}/{requestTypeId}")
+    void createRequest(@PathVariable("orderId") Integer orderId, @PathVariable("requestTypeId") Integer requestTypeId) {
+        requestService.createRequest(orderId, requestTypeId);
+    }
+
+    @PutMapping("/close-request/{requestId}")
+    void closeRequest(@PathVariable("requestId") Integer requestId) {
+        requestService.closeRequest(requestId);
+    }
+
 }
