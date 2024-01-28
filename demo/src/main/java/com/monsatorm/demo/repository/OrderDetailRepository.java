@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetailDbo, Long> {
-    @Query(value = "SELECT * FROM getorderdetailsfortable(:tableId)", nativeQuery = true)
-    List<OrderDetailDtoP> getOrderDetailByTableId(@Param("tableId") Integer tableId);
+    @Query(value = "SELECT * FROM getorderdetails(:tableId, :orderId)",
+            nativeQuery = true)
+    List<OrderDetailDtoP> getOrderDetailByTableId(@Param("tableId") Integer tableId, @Param("orderId") Integer orderId);
 }

@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDetailDtoPImpl {
+    Integer orderid;
     private String productName;
     private Integer quantity;
     private Double productPrice;

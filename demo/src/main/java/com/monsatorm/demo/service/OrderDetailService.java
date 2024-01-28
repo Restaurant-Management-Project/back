@@ -5,5 +5,5 @@ import com.monsatorm.demo.model.projections.OrderDetailDtoPImpl;
 import java.util.List;
 
 public interface OrderDetailService {
-    List<OrderDetailDtoPImpl> getOrderDetailByTableId(Integer tableId);
+    List<OrderDetailDtoPImpl> getOrderDetailByTableId(Integer tableId, Integer orderId);
 }

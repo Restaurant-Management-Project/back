@@ -1,4 +1,4 @@
-package com.monsatorm.demo.centroller;
+package com.monsatorm.demo.controller;
 
 import com.monsatorm.demo.model.projections.OrderDetailDtoPImpl;
 import com.monsatorm.demo.service.OrderDetailService;
@@ -14,8 +14,9 @@ import java.util.List;
 public class OrderDetailController {
     private final OrderDetailService orderDetailService;
 
-    @GetMapping("/get-by-table/{tableId}")
-    public List<OrderDetailDtoPImpl> getOrderDetailByTableId(@PathVariable("tableId") Integer tableId) {
-        return orderDetailService.getOrderDetailByTableId(tableId);
+    @GetMapping("/get-by-table/{tableId}/{orderId}")
+    public List<OrderDetailDtoPImpl> getOrderDetailByTableId(@PathVariable("tableId") Integer tableId,
+                                                             @PathVariable("orderId") Integer orderId) {
+        return orderDetailService.getOrderDetailByTableId(tableId, orderId);
     }
 }

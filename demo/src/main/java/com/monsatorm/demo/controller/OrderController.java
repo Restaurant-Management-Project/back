@@ -1,4 +1,4 @@
-package com.monsatorm.demo.centroller;
+package com.monsatorm.demo.controller;
 
 import com.monsatorm.demo.repository.OrderRepository;
 import com.monsatorm.demo.service.OrderService;

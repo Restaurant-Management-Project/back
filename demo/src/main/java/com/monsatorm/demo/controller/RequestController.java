@@ -1,38 +1,23 @@
 package com.monsatorm.demo.controller;
 
-import com.monsatorm.demo.model.dbo.Order;
-import com.monsatorm.demo.model.dto.request.ClientRequestDto;
-import com.monsatorm.demo.model.dto.request.ManagerRequestDto;
-import com.monsatorm.demo.service.ClientService;
-import com.monsatorm.demo.service.ManagerService;
-import com.monsatorm.demo.service.implementation.ClientServiceImpl;
-import com.monsatorm.demo.service.implementation.ManagerServiceImpl;
+import com.monsatorm.demo.service.RequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.UUID;
-
-@RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("api/request")
+@RequiredArgsConstructor
+@CrossOrigin("*")
 public class RequestController {
-    private final ClientServiceImpl clientService = new ClientServiceImpl();
-    private final ManagerServiceImpl managerService = new ManagerServiceImpl();
+    private RequestService requestService;
 
-    @PostMapping("/client_action")
-    public void getClientRequest(@RequestBody ClientRequestDto clientRequestDto) {
-
-        //service call
-    }
-    @PostMapping("/manager_action")
-    public void getManagerRequest(@RequestBody ManagerRequestDto managerRequestDto) {
-        //service call
+    @PostMapping("/create-request/{orderId}/{requestTypeId}")
+    void createRequest(@PathVariable("orderId") Integer orderId, @PathVariable("requestTypeId") Integer requestTypeId) {
+        requestService.createRequest(orderId, requestTypeId);
     }
 
-    @GetMapping("/order_details")
-    public String getOrder() {
-
-        return "Hello"; //fow now
+    @PutMapping("/close-request/{requestId}")
+    void closeRequest(@PathVariable("requestId") Integer requestId) {
+        requestService.closeRequest(requestId);
     }
 }
