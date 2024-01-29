@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderDbo, Long> {
     @Query("select closeorder(:orderId)")
-    void closeOrder(@Param("orderId") Integer orderId);
+    void closeOrder(@Param("orderId") String orderId);
 }

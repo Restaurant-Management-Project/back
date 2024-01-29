@@ -12,7 +12,7 @@ public class RequestController {
     private RequestService requestService;
 
     @PostMapping("/create-request/{orderId}/{requestTypeId}")
-    void createRequest(@PathVariable("orderId") Integer orderId, @PathVariable("requestTypeId") Integer requestTypeId) {
+    void createRequest(@PathVariable("orderId") String orderId, @PathVariable("requestTypeId") Integer requestTypeId) {
         requestService.createRequest(orderId, requestTypeId);
     }
 

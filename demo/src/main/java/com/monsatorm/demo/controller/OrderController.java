@@ -13,7 +13,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PutMapping("/close-order/{orderId}")
-    void closeOrder(@PathVariable("orderId") Integer orderId){
+    void closeOrder(@PathVariable("orderId") String orderId){
         orderService.closeOrder(orderId);
     }
 }
