@@ -1,17 +1,11 @@
 package com.monsatorm.demo.controller;
 
-import com.monsatorm.demo.model.dbo.Order;
-import com.monsatorm.demo.model.dto.request.ClientRequestDto;
-import com.monsatorm.demo.model.dto.request.ManagerRequestDto;
 import com.monsatorm.demo.model.projections.OrderDetailDtoPImpl;
 import com.monsatorm.demo.service.*;
-import com.monsatorm.demo.service.implementation.ClientServiceImpl;
-import com.monsatorm.demo.service.implementation.ManagerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -20,8 +14,8 @@ import java.util.UUID;
 public class RequestController {
     private final OrderService orderService;
     private final OrderDetailService orderDetailService;
-    private RequestService requestService;
-
+    private final RequestService requestService;
+    private final SessionService sessionService;
 
     @PutMapping("/close-order/{orderId}")
     void closeOrder(@PathVariable("orderId") Integer orderId){
@@ -41,6 +35,13 @@ public class RequestController {
     @PutMapping("/close-request/{requestId}")
     void closeRequest(@PathVariable("requestId") Integer requestId) {
         requestService.closeRequest(requestId);
+    }
+
+    @GetMapping("/init_session")
+    public UUID initSession() {
+        UUID newSession = UUID.randomUUID();
+        sessionService.initSession(newSession, null);
+        return newSession;
     }
 
 }
