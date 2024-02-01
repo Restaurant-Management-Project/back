@@ -35,4 +35,10 @@ public interface SessionRepository extends JpaRepository<SessionDbo, UUID> {
             @Param("orderId") String orderId,
             @Param("expirationTime") Timestamp expirationTime
     );
+
+    @Transactional
+    @Query(value = "select checksessionexpiration(cast(:sessionId AS varchar))", nativeQuery = true)
+    boolean checkSessionExpiration(
+            @Param("sessionId") String sessionId
+    );
 }

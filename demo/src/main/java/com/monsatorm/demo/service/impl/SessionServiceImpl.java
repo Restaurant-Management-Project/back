@@ -18,4 +18,10 @@ public class SessionServiceImpl implements SessionService {
     public void updateSessionTimeOrAddSession(String sessionId, Integer tableId, String orderId, Timestamp expirationTime) {
         sessionRepository.addupdatesession(sessionId, tableId, orderId, expirationTime);
     }
+
+    @Override
+    public boolean checkSessionExpiration(String sessionId) {
+        return sessionRepository.checkSessionExpiration(sessionId);
+    }
+
 }

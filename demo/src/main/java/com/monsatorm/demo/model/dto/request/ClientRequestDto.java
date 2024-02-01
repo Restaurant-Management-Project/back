@@ -12,6 +12,6 @@ import java.util.Date;
 @Setter
 @Builder
 public class ClientRequestDto {
-    private String action;
-    private LocalDateTime dateTime;
+    private Integer requestTypeId;
+    private String orderId;
 }

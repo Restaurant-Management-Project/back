@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface SessionService {
     void updateSessionTimeOrAddSession(String sessionId, Integer tableId, String orderId, Timestamp expirationTime);
+    boolean checkSessionExpiration(String sessionId);
 }
