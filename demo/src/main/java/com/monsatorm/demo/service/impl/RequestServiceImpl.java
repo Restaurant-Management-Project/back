@@ -11,7 +11,7 @@ public class RequestServiceImpl implements RequestService {
     private final RequestRepository requestRepository;
 
     @Override
-    public void createRequest(Integer orderId, Integer requestTypeId) {
+    public void createRequest(String orderId, Integer requestTypeId) {
         requestRepository.createRequest(orderId, requestTypeId);
     }
 

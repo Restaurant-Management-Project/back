@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RequestRepository extends JpaRepository<RequestDbo, Long> {
     @Query("select createrequest(:orderId, :requestTypeId)")
-    void createRequest(@Param("orderId") Integer orderId, @Param("requestTypeId") Integer requestTypeId);
+    void createRequest(@Param("orderId") String orderId, @Param("requestTypeId") Integer requestTypeId);
 
     @Query("select closerequest(:requestId)")
     void closeRequest(@Param("requestId") Integer requestId);

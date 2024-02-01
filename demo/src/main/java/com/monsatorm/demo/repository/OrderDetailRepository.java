@@ -8,10 +8,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetailDbo, Long> {
     @Query(value = "SELECT * FROM getorderdetails(:tableId, :orderId)",
             nativeQuery = true)
-    List<OrderDetailDtoP> getOrderDetailByTableId(@Param("tableId") Integer tableId, @Param("orderId") Integer orderId);
+    List<OrderDetailDtoP> getOrderDetailByTableId(@Param("tableId") Integer tableId, @Param("orderId") Optional<String > orderId);
+
+    @Query(value = "SELECT * FROM getorderdetails(:tableId)",
+            nativeQuery = true)
+    List<OrderDetailDtoP> getOrderDetailOnlyByTableId(@Param("tableId") Integer tableId);
+
 }

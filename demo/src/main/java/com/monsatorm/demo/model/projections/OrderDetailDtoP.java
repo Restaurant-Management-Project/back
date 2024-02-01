@@ -1,7 +1,7 @@
 package com.monsatorm.demo.model.projections;
 
 public interface OrderDetailDtoP {
-    Integer getOrderId();
+    String getOrderId();
     String getProductName();
 
     Integer getQuantity();

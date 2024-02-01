@@ -11,7 +11,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
     @Override
-    public void closeOrder(Integer orderId) {
+    public void closeOrder(String orderId) {
         orderRepository.closeOrder(orderId);
     }
 }
