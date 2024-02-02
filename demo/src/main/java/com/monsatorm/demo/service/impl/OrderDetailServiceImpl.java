@@ -14,7 +14,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     private final OrderDetailRepository orderDetailRepository;
 
     @Override
-    public List<OrderDetailDtoPImpl> getOrderDetailByTableId(Integer tableId, Integer orderId) {
+    public List<OrderDetailDtoPImpl> getOrderDetailByTableId(Integer tableId, String orderId) {
         return orderDetailRepository.getOrderDetailByTableId(tableId, orderId).stream()
                 .map(orderDetailDtoP -> OrderDetailDtoPImpl.builder()
                         .orderid(orderDetailDtoP.getOrderId())

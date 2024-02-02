@@ -1,5 +1,6 @@
 package com.monsatorm.demo.service.impl;
 
+import com.monsatorm.demo.model.dto.request.SessionOddUpdateRequestDto;
 import com.monsatorm.demo.repository.SessionRepository;
 import com.monsatorm.demo.service.SessionService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,17 @@ public class SessionServiceImpl implements SessionService {
     private final SessionRepository sessionRepository;
 
     @Override
-    public void updateSessionTimeOrAddSession(String sessionId, Integer tableId, String orderId, Timestamp expirationTime) {
-        sessionRepository.test(sessionId, tableId, orderId, expirationTime);
+    public void updateSessionTimeOrAddSession(SessionOddUpdateRequestDto sessionRequestDto) {
+        sessionRepository.test(
+                sessionRequestDto.getSessionId(),
+                sessionRequestDto.getTableId(),
+                sessionRequestDto.getOrderId(),
+                sessionRequestDto.getExpirationTime()
+        );
+    }
+
+    @Override
+    public Boolean checkSessionExpiration(String sessionId) {
+        return sessionRepository.checkSessionExpiration(sessionId);
     }
 }

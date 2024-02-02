@@ -16,7 +16,7 @@ public class OrderDetailController {
 
     @GetMapping("/get-by-table/{tableId}/{orderId}")
     public List<OrderDetailDtoPImpl> getOrderDetailByTableId(@PathVariable("tableId") Integer tableId,
-                                                             @PathVariable("orderId") Integer orderId) {
+                                                             @PathVariable("orderId") String orderId) {
         return orderDetailService.getOrderDetailByTableId(tableId, orderId);
     }
 }
