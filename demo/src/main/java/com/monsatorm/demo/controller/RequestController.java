@@ -1,40 +1,40 @@
 package com.monsatorm.demo.controller;
 
-import com.monsatorm.demo.model.dto.request.ClientRequestDto;
 import com.monsatorm.demo.model.projections.NoIdOrderDetailDtoPImpl;
-import com.monsatorm.demo.model.projections.OrderDetailDtoPImpl;
+import com.monsatorm.demo.model.projections.RequestHistoryDtoPImpl;
 import com.monsatorm.demo.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class RequestController {
-    private final RequestService requestService;
-    private final OrderService orderService;
     private final OrderDetailService orderDetailService;
     private final SessionService sessionService;
+    private final RequestService requestService;
     private final CookieService cookieService;
+    private final OrderService orderService;
 
     @GetMapping("/init-session/{tableId}")
-    public String initSession(@PathVariable("tableId") Integer tableId, HttpServletRequest request,
-                               HttpServletResponse response)  {
-        String sessionId = cookieService.checkUserCookies(request, response);
-        boolean sessionStatus = sessionService.checkSessionExpiration(sessionId);
-        //todo present valid || present expired || absent
+    public String initSession(@PathVariable("tableId") Integer tableId,
+                              HttpServletRequest request,
+                              HttpServletResponse response) {
 
-        if(!sessionStatus) {
-            sessionService.updateSessionTimeOrAddSession(sessionId, tableId, "6b55d095-932e-4e2a-a388-ca3f1d6258f1", null);
-        }
-        return "redirect:/home";
+        String sessionId = cookieService.checkUserCookies(request, response);
+//        boolean sessionStatus = sessionService.checkSessionExpiration(sessionId);
+//        String sessionId = UUID.randomUUID().toString();
+
+        sessionService.updateSessionTimeOrAddSession(sessionId, tableId, sessionId, null);
+
+        //todo cookie permission
+        //todo present valid || present expired || absent
+        return sessionId;
     }
 
     @GetMapping("/home")
@@ -43,11 +43,10 @@ public class RequestController {
         return "homeeeee";
     }
     @PostMapping("/create-request/{orderId}/{requestTypeId}")
-    void createRequest(@PathVariable("orderId") String orderId, @PathVariable("requestTypeId") Integer requestTypeId,
-                       @RequestBody ClientRequestDto clientRequestDto) {
+    void createRequest(@PathVariable("orderId") String orderId, @PathVariable("requestTypeId") Integer requestTypeId) {
 
-//        requestService.createRequest(orderId, requestTypeId);
-        requestService.createRequest(clientRequestDto.getOrderId(), clientRequestDto.getRequestTypeId());
+        requestService.createRequest(orderId, requestTypeId);
+        requestService.broadcastRecentRequests();
     }
     @PutMapping("/close-request/{requestId}")
     void closeRequest(@PathVariable("requestId") Integer requestId) {
@@ -58,15 +57,21 @@ public class RequestController {
     void closeOrder(@PathVariable("orderId") String orderId){
         orderService.closeOrder(orderId);
     }
-    @GetMapping("/get-by-table-and-id/{tableId}/{orderId}")
-    public List<OrderDetailDtoPImpl> getOrderDetailByTableId(@PathVariable("tableId") Integer tableId,
-                                                             @PathVariable("orderId") Optional<String> orderId) {
-        return orderDetailService.getOrderDetailByTableId(tableId, orderId);
-    }
+//    @GetMapping("/get-by-table-and-id/{tableId}/{orderId}")
+//    public List<OrderDetailDtoPImpl> getOrderDetailByTableId(@PathVariable("tableId") Integer tableId,
+//                                                             @PathVariable("orderId") Optional<String> orderId) {
+//        return orderDetailService.getOrderDetailByTableId(tableId, orderId);
+//    }
     @GetMapping("/get-by-table/{tableId}")
     public List<NoIdOrderDetailDtoPImpl> getOrderDetailByTableIdNoId(@PathVariable("tableId") Integer tableId) {
 
         return orderDetailService.getOrderDetailByOnlyTableId(tableId);
+    }
+
+    @GetMapping("/recent-requests")
+    public List<RequestHistoryDtoPImpl> getRecentRequests() {
+
+        return requestService.getRecentRequests();
     }
 
     //test

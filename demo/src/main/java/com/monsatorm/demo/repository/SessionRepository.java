@@ -26,10 +26,9 @@ public interface SessionRepository extends JpaRepository<SessionDbo, UUID> {
 //            @Param("expirationTime") Timestamp expirationTime
 //    );
 
-    @Modifying
     @Transactional
-    @Query(value = "SELECT addupdatesession(CAST(:sessionId AS varchar), :tableId, CAST(:orderId AS varchar), CAST(:expirationTime AS timestamp))", nativeQuery = true)
-    void addupdatesession(
+    @Query(value = "select test(:sessionId, :tableId, :orderId, :expirationTime)", nativeQuery = true)
+    void addUpdateSession(
             @Param("sessionId") String sessionId,
             @Param("tableId") Integer tableId,
             @Param("orderId") String orderId,

@@ -16,7 +16,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public void updateSessionTimeOrAddSession(String sessionId, Integer tableId, String orderId, Timestamp expirationTime) {
-        sessionRepository.addupdatesession(sessionId, tableId, orderId, expirationTime);
+        sessionRepository.addUpdateSession(sessionId, tableId, orderId, expirationTime);
     }
 
     @Override

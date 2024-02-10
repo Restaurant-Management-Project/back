@@ -19,5 +19,4 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetailDbo, Lon
     @Query(value = "SELECT * FROM getorderdetails(:tableId)",
             nativeQuery = true)
     List<OrderDetailDtoP> getOrderDetailOnlyByTableId(@Param("tableId") Integer tableId);
-
 }
