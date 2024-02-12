@@ -14,9 +14,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
-                .setAllowedOrigins("http://localhost:3000", "http://localhost:8080", "http://localhost:63342", "*")
-                .withSockJS();
+                .setAllowedOrigins("http://localhost:3000", "http://localhost:8080", "http://localhost:63342", "*");
+
     }
+
+//    @Override
+//    public void registerStompEndpoints(StompEndpointRegistry registry) {
+//        registry.addEndpoint("/ws").withSockJS();
+//    }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
@@ -28,5 +33,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void configureClientInboundChannel(ChannelRegistration registration) {
         registration.interceptors(new WebSocketChannelInterceptor());
     }
-
 }

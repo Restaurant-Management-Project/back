@@ -14,8 +14,7 @@ public class WebSocketChannelInterceptor implements ChannelInterceptor {
     @Override
     public void postSend(Message<?> message, MessageChannel channel, boolean sent) {
         // Check if the message is an error message
-        if (message instanceof ErrorMessage) {
-            ErrorMessage errorMessage = (ErrorMessage) message;
+        if (message instanceof ErrorMessage errorMessage) {
             logger.error("WebSocket Error: ", errorMessage.getPayload());
         }
     }

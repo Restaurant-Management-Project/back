@@ -1,6 +1,5 @@
 package com.monsatorm.demo.service.impl;
 
-import com.monsatorm.demo.model.dbo.RequestHistoryDbo;
 import com.monsatorm.demo.model.projections.RequestHistoryDtoPImpl;
 import com.monsatorm.demo.repository.RequestHistoryRepository;
 import com.monsatorm.demo.repository.RequestRepository;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service

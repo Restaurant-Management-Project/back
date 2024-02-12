@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
 //    public void addCorsMappings(CorsRegistry registry) {
 //        registry.addMapping("/**")
 //                .allowCredentials(true)
-//                .allowedOriginPatterns("*")
+//                .allowedOriginPatterns("**")
 //                .allowedMethods(new String[] {"GET", "POST", "PUT", "DELETE"})
 //                .allowedHeaders("*");
 //    }
@@ -27,7 +27,8 @@ public class WebConfig implements WebMvcConfigurer {
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
         // Replace "*" with explicit origins
-        configuration.setAllowedOrigins(Arrays.asList("http://192.168.100.7:5173"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://192.168.100.7:5173", "https://front-kappa-blush.vercel.app",
+                "http://localhost:8080", "http://localhost:5173/"));
         // Alternatively, for dynamic but secure handling, consider using setAllowedOriginPatterns and specify acceptable patterns
         // configuration.setAllowedOriginPatterns(Arrays.asList("http://192.168.100.7:5173"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));

@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NoIdOrderDetailDtoPImpl {
-    private String orderId;
+    private String key;
     private String productName;
     private Integer quantity;
     private Double productPrice;

@@ -78,6 +78,6 @@ public class RequestController {
     @GetMapping("/{tableId}")
     public String getOrderId(@PathVariable("tableId") Integer tableId) {
         List<NoIdOrderDetailDtoPImpl> orderDetails = orderDetailService.getOrderDetailByOnlyTableId(tableId);
-        return !orderDetails.isEmpty() ? orderDetails.get(0).getOrderId() : null;
+        return !orderDetails.isEmpty() ? orderDetails.get(0).getKey() : null;
     }
 }
