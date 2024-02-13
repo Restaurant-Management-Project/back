@@ -10,7 +10,12 @@ spring:
     hibernate.ddl-auto: none
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
-
+#server:
+#  ssl:
+#    key-store: classpath:keystore.p12
+#    key-store-password: Malcon1243373
+#    key-store-type: PKCS12
+#    key-alias: myalias
 
 
 #spring:
@@ -25,3 +30,4 @@ spring:
 #    hibernate.ddl-auto: create-drop
 #    database-platform: org.hibernate.dialect.PostgreSQLDialect
 #    open-in-view: false
+
